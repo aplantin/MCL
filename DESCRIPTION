@@ -1,0 +1,15 @@
+Package: MCL
+Title: Fits multilevel compositional lasso
+Version: 0.0.0.9000
+Author: Anna Plantinga
+Maintainer: Anna Plantinga <amp9@williams.edu>
+Description: Fits a nested linear log-contrast model with lasso penalties on group-level and within-group coefficients. 
+Depends: R (>= 3.4.3)
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+LinkingTo: Rcpp, RcppArmadillo
+Imports: Rcpp
+RoxygenNote: 6.0.1
+NeedsCompilation: yes
+Packaged: 2018-03-14 05:30:35 UTC; anna
