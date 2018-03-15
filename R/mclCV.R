@@ -53,6 +53,8 @@ mcl.cv <- function(Z, W, y, mu = 1, groups, lam.seq = NULL, lam.max = NULL,
     lam.seq[[2]] <- exp(seq(from = log(lam.max[2]),
                             to = log(min.frac*lam.max[2]),
                             length.out = nlam[2]))
+  } else {
+    nlam <- c(length(lam.seq[[1]]), length(lam.seq[[2]]))
   }
 
   folds <- get.folds(n = length(y), nfolds)
