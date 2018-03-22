@@ -4,12 +4,19 @@
 \alias{dataprep.mcl}
 \title{dataprep.mcl}
 \usage{
-dataprep.mcl(otu.table, groups)
+dataprep.mcl(otu.table, groups, rare.count = 1, rare.prop = 0,
+  pseudocount = 0.5)
 }
 \arguments{
 \item{otu.table}{Matrix of otu counts; rows are subjects, columns are OTUs.}
 
 \item{groups}{Vector indicating group membership}
+
+\item{rare.count}{OTU count considered "rare"; OTUs with total read count <= rare.count will be excluded. Default is 1 (exclude singletons).}
+
+\item{rare.prop}{Alternative to rare.count; minimum proportion of samples in which the OTU should appear. Default is 0.}
+
+\item{pseudocount}{Count to replace zeros; default is 0.5.}
 }
 \value{
 Returns a list with elements Z and W for input into MCL function

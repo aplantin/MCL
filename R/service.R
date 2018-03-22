@@ -5,34 +5,46 @@
 #'
 #' @param otu.table Matrix of otu counts; rows are subjects, columns are OTUs.
 #' @param groups Vector indicating group membership
-#' @return Returns a list with elements Z and W for input into MCL function 
+#' @param rare.count OTU count considered "rare"; OTUs with total read count <= rare.count will be excluded. Default is 1 (exclude singletons).
+#' @param rare.prop Alternative to rare.count; minimum proportion of samples in which the OTU should appear. Default is 0.
+#' @param pseudocount Count to replace zeros; default is 0.5.
+#' @return Returns a list with elements Z and W for input into MCL function
 #' @export
 #'
-dataprep.mcl <- function(otu.table, groups) {
-    ## X: overall rel. abund.
-    X <- otu.table
-    for (i in 1:nrow(X)) {
-        X[i, ] <- X[i, ] / sum(X[i, ])
-    }
-    
-    ## Z: group-wide proportions
-    Z.tilde <- t(apply(X, 1, FUN = function(xx) aggregate(xx, by = list(groups), FUN = function(zz) sum(zz))$x))
-    Z <- log(Z.tilde)
-    
-    ## W: within-group proportions
-    pj.vec <- unname(table(groups))
-    if (length(unique(pj.vec)) == 1) {
-        W.tilde <- t(apply(X, 1, FUN = function(yy) {
-            c(t(aggregate(yy, by = list(groups), FUN = function(zz) zz/sum(zz))$x))
-        }))
-    } else {
-        W.tilde <- t(apply(X, 1, FUN = function(yy) {
-            unname(unlist(aggregate(yy, by = list(groups), FUN = function(zz) zz/sum(zz))$x))
-        }))
-    }
-    W <- log(W.tilde)
-    
-    return(list(Z = Z, W = W))
+dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseudocount = 0.5) {
+  rare1 <- which(apply(otu.table, 2, sum) <= rare.count)
+  rare2 <- which(apply(otu.table, 2, FUN = function(x) sum(x != 0)) <= rare.prop)
+  rare <- unique(c(rare1, rare2))
+  otus.common <- otu.table[, -rare]
+  otus.common[which(otus.common == 0)] <- pseudocount
+  X <- otus.common
+  groups <- groups[-rare]
+
+  ## X: overall rel. abund.
+  for (i in 1:nrow(X)) {
+    X[i, ] <- X[i, ] / sum(X[i, ])
+  }
+
+  ## Z: group-wide proportions
+  Z.tilde <- t(apply(X, 1, FUN = function(xx) aggregate(xx, by = list(groups), FUN = function(zz) sum(zz))$x))
+  colnames(Z.tilde) <- aggregate(X[1,], by = list(groups), FUN = function(zz) sum(zz))$Group.1
+  Z <- log(Z.tilde)
+
+  ## W: within-group proportions
+  pj.vec <- unname(table(groups))
+  if (length(unique(pj.vec)) == 1) {
+    W.tilde <- t(apply(X, 1, FUN = function(yy) {
+      c(t(aggregate(yy, by = list(groups), FUN = function(zz) zz/sum(zz))$x))
+    }))
+  } else {
+    W.tilde <- t(apply(X, 1, FUN = function(yy) {
+      unname(unlist(aggregate(yy, by = list(groups), FUN = function(zz) zz/sum(zz))$x))
+    }))
+  }
+  W <- log(W.tilde)
+
+  colnames(W) <- colnames(X)
+  return(list(Z = Z, W = W))
 }
 
 
