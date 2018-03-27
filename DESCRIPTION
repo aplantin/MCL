@@ -12,4 +12,4 @@ LinkingTo: Rcpp, RcppArmadillo
 Imports: Rcpp
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2018-03-22 19:51:24 UTC; anna
+Packaged: 2018-03-27 19:48:26 UTC; anna
