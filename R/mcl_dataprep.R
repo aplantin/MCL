@@ -53,8 +53,8 @@ dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseud
         }))
     }
     singletons <- names(pj.vec)[which(pj.vec == 1)]
-    singleton.features.idx <- which(groups == singletons)
-    singleton.feature.names <- colnames(X)[which(groups == singletons)]
+    singleton.features.idx <- which(groups %in% singletons)
+    singleton.feature.names <- colnames(X)[which(groups %in% singletons)]
     
     W.tilde <- W.tilde[ , -singleton.features.idx]
     groups0 <- groups[-singleton.features.idx]
