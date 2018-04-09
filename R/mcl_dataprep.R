@@ -30,6 +30,9 @@ dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseud
     otus.common <- otu.table
   }
 
+  if (pseudocount <= 0) {
+    stop("Pseudocount must be a positive number.")
+  }
   otus.common[which(otus.common == 0)] <- pseudocount
   X <- otus.common
 
@@ -59,6 +62,7 @@ dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseud
   colnames(W) <- colnames(X)
   return(list(Z = Z, W = W))
 }
+
 
 
 
