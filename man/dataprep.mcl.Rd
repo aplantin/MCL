@@ -19,7 +19,7 @@ dataprep.mcl(otu.table, groups, rare.count = 1, rare.prop = 0,
 \item{pseudocount}{Count to replace zeros; default is 0.5.}
 }
 \value{
-Returns a list with elements Z and W for input into MCL function.
+Returns a list with elements Z, W, and groups for input into MCL function, and a vector with the names of groups with only one element (excluded from W matrix).
 }
 \description{
 Prepares input matrices for MCL function based on otu count matrix.
