@@ -58,6 +58,7 @@ dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseud
     
     W.tilde <- W.tilde[ , -singleton.features.idx]
     groups0 <- groups[-singleton.features.idx]
+    groups0 <- as.numeric(as.factor(groups0))  
     
     W <- log(W.tilde)
     colnames(W) <- colnames(X)[-singleton.features.idx]
