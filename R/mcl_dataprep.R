@@ -18,7 +18,7 @@ dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseud
         rare1 <- c()
     }
     if (rare.prop > 0) {
-        rare2 <- which(apply(otu.table, 2, FUN = function(x) sum(x != 0)) <= rare.prop)
+        rare2 <- which(apply(otu.table, 2, FUN = function(x) mean(x != 0)) <= rare.prop)
     } else {
         rare2 <- c()
     }
