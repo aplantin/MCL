@@ -42,6 +42,51 @@ findMaxLams <- function(Z, W, y, facZ, facW, groups, groupIdx, mu, maxit, thresh
     .Call('_MCL_findMaxLams', PACKAGE = 'MCL', Z, W, y, facZ, facW, groups, groupIdx, mu, maxit, thresh)
 }
 
+#' mclC
+#'
+#' Runs my multilevel compositional lasso
+#'
+#' @param Z OTU matrix (group level)
+#' @param W OTU matrix (within-group level)
+#' @param y Vector of outcomes
+#' @param facZ Scaling factors for Z
+#' @param facW Scaling factors for W
+#' @param step Step-size
+#' @param groups Vector of group membership
+#' @param groupIdx List of feature indices in each group
+#' @param mu Lagrange scaling parameter
+#' @param lam1 Lambda for group-level lasso penalty
+#' @param lam2 Lambda for within-group lasso penalty
+#' @param thresh Parameter defining convergence
+#' @param maxit Maximum number of iterations allowed
+#' @return List of beta matrix, gamma matrix
+#' @export
+mclC_step <- function(Z, W, y, facZ, facW, step, groups, groupIdx, mu, lam1, lam2, thresh, maxit) {
+    .Call('_MCL_mclC_step', PACKAGE = 'MCL', Z, W, y, facZ, facW, step, groups, groupIdx, mu, lam1, lam2, thresh, maxit)
+}
+
+#' findMaxLams
+#'
+#' Finds maximum lambda value (smallest lambda such
+#' that all coefficients are zero) for both lam1 and lam2
+#'
+#' @param Z OTU matrix (group level)
+#' @param W OTU matrix (within-group level)
+#' @param y Vector of outcomes
+#' @param facZ Scaling factors for Z
+#' @param facW Scaling factors for W
+#' @param step Step-size
+#' @param groups Vector indicating group membership for each feature
+#' @param groupIdx List indicating feature indices in each group
+#' @param mu Lagrange scaling parameter
+#' @param maxit Maximum number of iterations allowed
+#' @param thresh Parameter defining convergence
+#' @return vector with maxlam1, maxlam2
+#' @export
+findMaxLams_step <- function(Z, W, y, facZ, facW, step, groups, groupIdx, mu, maxit, thresh) {
+    .Call('_MCL_findMaxLams_step', PACKAGE = 'MCL', Z, W, y, facZ, facW, step, groups, groupIdx, mu, maxit, thresh)
+}
+
 #' signC
 #'
 #' Finds the sign of a double
