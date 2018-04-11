@@ -1,5 +1,4 @@
 #include <RcppArmadillo.h>
-#include "service.h"
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
 

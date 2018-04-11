@@ -48,50 +48,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// mclC_step
-Rcpp::List mclC_step(arma::mat Z, arma::mat W, arma::vec y, arma::vec facZ, arma::vec facW, double step, arma::vec groups, Rcpp::List groupIdx, double mu, double lam1, double lam2, double thresh, double maxit);
-RcppExport SEXP _MCL_mclC_step(SEXP ZSEXP, SEXP WSEXP, SEXP ySEXP, SEXP facZSEXP, SEXP facWSEXP, SEXP stepSEXP, SEXP groupsSEXP, SEXP groupIdxSEXP, SEXP muSEXP, SEXP lam1SEXP, SEXP lam2SEXP, SEXP threshSEXP, SEXP maxitSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type W(WSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type facZ(facZSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type facW(facWSEXP);
-    Rcpp::traits::input_parameter< double >::type step(stepSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type groups(groupsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::List >::type groupIdx(groupIdxSEXP);
-    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
-    Rcpp::traits::input_parameter< double >::type lam1(lam1SEXP);
-    Rcpp::traits::input_parameter< double >::type lam2(lam2SEXP);
-    Rcpp::traits::input_parameter< double >::type thresh(threshSEXP);
-    Rcpp::traits::input_parameter< double >::type maxit(maxitSEXP);
-    rcpp_result_gen = Rcpp::wrap(mclC_step(Z, W, y, facZ, facW, step, groups, groupIdx, mu, lam1, lam2, thresh, maxit));
-    return rcpp_result_gen;
-END_RCPP
-}
-// findMaxLams_step
-arma::vec findMaxLams_step(arma::mat Z, arma::mat W, arma::vec y, arma::vec facZ, arma::vec facW, double step, arma::vec groups, Rcpp::List groupIdx, double mu, double maxit, double thresh);
-RcppExport SEXP _MCL_findMaxLams_step(SEXP ZSEXP, SEXP WSEXP, SEXP ySEXP, SEXP facZSEXP, SEXP facWSEXP, SEXP stepSEXP, SEXP groupsSEXP, SEXP groupIdxSEXP, SEXP muSEXP, SEXP maxitSEXP, SEXP threshSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type W(WSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type facZ(facZSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type facW(facWSEXP);
-    Rcpp::traits::input_parameter< double >::type step(stepSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type groups(groupsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::List >::type groupIdx(groupIdxSEXP);
-    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
-    Rcpp::traits::input_parameter< double >::type maxit(maxitSEXP);
-    Rcpp::traits::input_parameter< double >::type thresh(threshSEXP);
-    rcpp_result_gen = Rcpp::wrap(findMaxLams_step(Z, W, y, facZ, facW, step, groups, groupIdx, mu, maxit, thresh));
-    return rcpp_result_gen;
-END_RCPP
-}
 // signC
 double signC(double x);
 RcppExport SEXP _MCL_signC(SEXP xSEXP) {
@@ -164,8 +120,6 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_MCL_mclC", (DL_FUNC) &_MCL_mclC, 12},
     {"_MCL_findMaxLams", (DL_FUNC) &_MCL_findMaxLams, 10},
-    {"_MCL_mclC_step", (DL_FUNC) &_MCL_mclC_step, 13},
-    {"_MCL_findMaxLams_step", (DL_FUNC) &_MCL_findMaxLams_step, 11},
     {"_MCL_signC", (DL_FUNC) &_MCL_signC, 1},
     {"_MCL_absC", (DL_FUNC) &_MCL_absC, 1},
     {"_MCL_absC2", (DL_FUNC) &_MCL_absC2, 1},
