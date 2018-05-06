@@ -65,7 +65,7 @@ double softC(double x, double lam) {
 // [[Rcpp::export]]
 arma::vec softC2(arma::vec x, double lam){
   arma::vec xal = abs(x) - lam;
-  arma::uvec sparse = arma::uvec(xal > 0);
+  arma::uvec sparse = arma::uvec(xal > 0.0);
   return xal % sparse % sign(x);
 }
 

@@ -36,8 +36,8 @@ Rcpp::List mclC(arma::mat Z, arma::mat W, arma::vec y,
   arma::vec xi = arma::zeros<arma::vec>(J + 1);
 
   int count = 0;
-  double diff = thresh + 1;
-  double mu1 = 1 / (1 + mu);
+  double diff = thresh + 1.0;
+  double mu1 = 1.0 / (1.0 + mu);
 
   while (count < maxit && diff > thresh) {
     diff = 0.0;
@@ -102,7 +102,7 @@ arma::vec findMaxLams(arma::mat Z, arma::mat W, arma::vec y,
     Rcpp::List res = mclC(Z, W, y, facZ, facW, groups, groupIdx, mu,
                           maxlam1, alt2, thresh, maxit);
     arma::vec bet = as<arma::vec>(res[0]);
-    if (any(bet != 0)) {
+    if (any(bet != 0.0)) {
       all_zero = false;
     }
   }
@@ -117,7 +117,7 @@ arma::vec findMaxLams(arma::mat Z, arma::mat W, arma::vec y,
     Rcpp::List res = mclC(Z, W, y, facZ, facW, groups, groupIdx, mu,
                           alt1, maxlam2, thresh, maxit);
     arma::vec gam = as<arma::vec>(res[1]);
-    if (any(gam != 0)) {
+    if (any(gam != 0.0)) {
       all_zero = false;
     }
   }
