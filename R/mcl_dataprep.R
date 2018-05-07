@@ -55,7 +55,7 @@ dataprep.mcl <- function(otu.table, groups, rare.count = 1, rare.prop = 0, pseud
     colnames(W.tilde) <- colnames(X)[order(groups)]
 
     groups0 <- c()
-    for (i in 1:17) {
+    for (i in 1:length(unique(groups))) {
       groups0 <- c(groups0,
                    rep(aggregate(X[1,], by = list(groups), FUN = function(zz) zz/sum(zz))$Group.1[i],
                        length(unlist(aggregate(X[1,], by = list(groups), FUN = function(zz) {
